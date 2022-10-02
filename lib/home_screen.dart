@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lojadeplantasui/product_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -8,7 +9,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final textStyle = TextStyle(
+  final textStyle = const TextStyle(
     fontSize: 18,
     color: Colors.white,
   );
@@ -16,19 +17,36 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: const Icon(
+          Icons.scatter_plot,
+          size: 40,
+          color: Colors.white,
+        ),
+        backgroundColor: const Color(0xff67864a),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              alignment: Alignment.centerRight,
+              width: MediaQuery.of(context).size.width - 120,
+              child: const Icon(
+                Icons.search_outlined,
+                size: 40,
+              ),
+            ),
+          ),
+        ],
+      ),
+      backgroundColor: Colors.white,
       body: Row(
         children: [
           Container(
-            width: 90,
+            width: 80,
             color: const Color(0xff67864a),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Icon(
-                  Icons.scatter_plot,
-                  size: 40,
-                  color: Colors.white,
-                ),
                 RotatedBox(
                   quarterTurns: 3,
                   child: Text(
@@ -53,25 +71,32 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          Column(
-            children: [
-              const SizedBox(height: 70,),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width - 120,
-                      child: const Icon(
-                        Icons.search_outlined,
-                        size: 40,
-                      ),
-                    ),
-                  )
-                ],
-              )
-            ],
+          SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 20,),
+                Container(
+                  padding: EdgeInsets.only(left:10),
+                  alignment: Alignment.centerLeft,
+                  width: MediaQuery.of(context).size.width - 120,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text('Verde',style: TextStyle(color:Colors.grey,
+                          fontSize: 18
+                      ),),
+                      Text('Plantas',style: TextStyle(
+                          fontSize: 30
+                      )),
+                    ],
+                  ),
+                ),
+                ProductList(),
+              ],
+            ),
           )
         ],
       ),
